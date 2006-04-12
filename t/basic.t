@@ -5,7 +5,7 @@ use warnings;
 use Test::More tests => 33;
 
 my $has_params_util = eval {
-  require Params::Util;
+  eval "use Params::Util 0.11";
   Params::Util->import('_CLASS');
   1;
 };
@@ -13,8 +13,9 @@ my $has_params_util = eval {
 sub pkg_ok {
   my ($name) = @_;
   SKIP: {
-    skip "test can't be run without Params::Util", 1 unless $has_params_util;
-    skip "Params::Util::_CLASS is a big fat liar", 1;
+    skip "test can't be run without Params::Util 0.11 or newer", 1
+      unless $has_params_util;
+
     ok(_CLASS($name), qq{"$name" is a valid package name});
   }
 }

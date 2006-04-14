@@ -5,7 +5,7 @@ use warnings;
 use Test::More tests => 33;
 
 my $has_params_util = eval {
-  eval "use Params::Util 0.11";
+  eval "use Params::Util 0.11" or die $@;
   Params::Util->import('_CLASS');
   1;
 };

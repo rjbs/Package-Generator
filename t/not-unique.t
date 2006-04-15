@@ -30,39 +30,25 @@ sub seq {
 }
 
 eval {
-  my $S = seq;
-  Package::Generator->new_package({
-    make_unique => sub { sprintf "%s::%u", $_[0], $S->() },
-  });
+  Package::Generator->new_package({ unique_part => seq });
 };
 
 is($@, '', "no problem making table with 1");
 
 eval {
-  my $S = seq;
-  Package::Generator->new_package({
-    make_unique => sub { sprintf "%s::%u", $_[0], $S->() },
-  });
+  Package::Generator->new_package({ unique_part => seq });
 };
 
 like($@, qr/couldn't generate a pristene/, "but second attempt fails (good!)");
 
 eval {
-  my $S = seq;
-  Package::Generator->new_package({
-    max_tries   => 2,
-    make_unique => sub { sprintf "%s::%u", $_[0], $S->() },
-  });
+  Package::Generator->new_package({ max_tries   => 2, unique_part => seq });
 };
 
 is($@, '', "but an atempt with max_tries=2 is ok");
 
 eval {
-  my $S = seq;
-  Package::Generator->new_package({
-    max_tries   => 2,
-    make_unique => sub { sprintf "%s::%u", $_[0], $S->() },
-  });
+  Package::Generator->new_package({ max_tries   => 2, unique_part => seq });
 };
 
 like(
@@ -72,11 +58,7 @@ like(
 );
 
 eval {
-  my $S = seq;
-  Package::Generator->new_package({
-    max_tries   => 3,
-    make_unique => sub { sprintf "%s::%u", $_[0], $S->() },
-  });
+  Package::Generator->new_package({ max_tries   => 3, unique_part => seq });
 };
 
 is($@, '', "but an atempt with max_tries=3 is ok");

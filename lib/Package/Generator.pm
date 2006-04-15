@@ -12,13 +12,13 @@ Package::Generator - generate new packages quickly and easily
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
  $Id$
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
@@ -66,15 +66,19 @@ cause C<$ISA> to be assigned;  that wouldn't be very helpful.)
 =cut
 
 my $i = 0;
+my $unique_part = sub { $i++ };
+my $make_unique = sub { sprintf "%s::%u", $_[0], $_[1]->() };
+
 sub new_package {
   my ($self, $arg) = @_;
   $arg->{base} ||= 'Package::Generator::__GENERATED__';
-  $arg->{make_unique} ||= sub { sprintf "%s::%u", $arg->{base}, $i++ };
+  $arg->{unique_part} ||= $unique_part;
+  $arg->{make_unique} ||= $make_unique;
   $arg->{max_tries} ||= 1;
 
   my $package;
   for (my $i = 1; 1; $i++) {
-    $package = $arg->{make_unique}->($arg->{base});
+    $package = $arg->{make_unique}->($arg->{base}, $arg->{unique_part});
     last unless $self->package_exists($package); 
     Carp::croak "couldn't generate a pristene package under $arg->{base}"
       if $i >= $arg->{max_tries};

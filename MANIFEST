@@ -14,5 +14,7 @@ META.yml			# Will be created by "make dist"
 README
 t/00-load.t
 t/basic.t
+t/not-unique.t
+t/pkg-exists.t
 t/pod-coverage.t
 t/pod.t

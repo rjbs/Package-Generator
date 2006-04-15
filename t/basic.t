@@ -106,19 +106,22 @@ BEGIN { use_ok('Package::Generator'); }
 {
   no warnings 'once';
 
-  my $pkg = Package::Generator->new_package({
-    make_unique => sub { return 'Totally::Not::Unique' }, # cheating!
-    data => [ 
-      foo => 10,
-      bar => 12,
-      foo => [ qw(a b c d) ],
-      foo => { birth => 1978, death => 2862 },
-      foo => sub { return "Give me foo or give me death!" },
-      obj => bless({} => 'Foo::Bar'),
-      qux => 14,    # you know, you could take advantage of multiple assignment
-      qux => undef, # to assign a tied scalar, then reassign for evil! yow!
-    ],
-  });
+  my $pkg;
+  BEGIN {
+    $pkg = Package::Generator->new_package({
+      make_unique => sub { return 'Totally::Not::Unique' }, # cheating!
+      data => [ 
+        foo => 10,
+        bar => 12,
+        foo => [ qw(a b c d) ],
+        foo => { birth => 1978, death => 2862 },
+        foo => sub { return "Give me foo or give me death!" },
+        obj => bless({} => 'Foo::Bar'),
+        qux => 14,    # you could take advantage of multiple assignment to
+        qux => undef, # assign a tied scalar, then reassign for evil! yow!
+      ],
+    });
+  }
 
   pkg_ok($pkg);
 

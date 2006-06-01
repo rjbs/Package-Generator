@@ -11,6 +11,4 @@ version_from  ('lib/Package/Generator.pm');
 requires('Test::More'       => 0.00);
 requires('Scalar::Util'     => 0.00);
 
-sign(1);
-
 WriteAll();

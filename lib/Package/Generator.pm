@@ -12,13 +12,13 @@ Package::Generator - generate new packages quickly and easily
 
 =head1 VERSION
 
-version 0.02
+version 0.100
 
  $Id$
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.100';
 
 =head1 SYNOPSIS
 

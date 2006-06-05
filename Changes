@@ -1,5 +1,8 @@
 Revision history for Package-Generator
 
+0.100   2006-06-05
+        added Package::Reaper
+
 0.02    2006-05-31
         meant to release 2006-04-15; oops!
         ensure that returned packages are, in fact, unique

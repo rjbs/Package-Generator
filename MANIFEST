@@ -8,6 +8,7 @@ inc/Module/Install/Metadata.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 lib/Package/Generator.pm
+lib/Package/Reaper.pm
 Makefile.PL
 MANIFEST
 META.yml			# Will be created by "make dist"
@@ -18,3 +19,4 @@ t/not-unique.t
 t/pkg-exists.t
 t/pod-coverage.t
 t/pod.t
+t/reaper.t

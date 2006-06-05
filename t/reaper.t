@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 14;
+use Test::More tests => 24;
 
 BEGIN {
   use_ok('Package::Generator');
@@ -23,6 +23,11 @@ BEGIN {
 
   {
     my $reaper = Package::Reaper->new('Test::Package::Reaper');
+
+    is($reaper->package, 'Test::Package::Reaper', "package is set");
+
+    eval { $reaper->package('New::Package'); };
+    like($@, qr/may not be altered/, "->package isn't a mutator");
   }
 
   my $x = eval { Test::Package::Reaper->foo };
@@ -77,6 +82,59 @@ BEGIN {
       Package::Generator->package_exists($pkg),
       "package to reap still exists",
     );
+  }
+
+  ok(
+    ! Package::Generator->package_exists($pkg),
+    "after reaper is gone, the package is reaped; RIP",
+  );
+}
+
+{ # disarmed reaper
+  my $pkg = Package::Generator->new_package;
+
+  ok(
+    Package::Generator->package_exists($pkg),
+    "a newly generated package exists: $pkg",
+  );
+
+  {
+    my $reaper = Package::Reaper->new($pkg);
+    isa_ok($reaper, 'Package::Reaper', "the reaper");
+
+    $reaper->disarm;
+
+    ok(
+      Package::Generator->package_exists($pkg),
+      "package to reap still exists",
+    );
+  }
+
+  ok(
+    Package::Generator->package_exists($pkg),
+    "after reaper is gone, the package is not reaped; we disarmed!",
+  );
+}
+
+{ # disarm, rearm
+  my $pkg = Package::Generator->new_package;
+
+  ok(
+    Package::Generator->package_exists($pkg),
+    "a newly generated package exists: $pkg",
+  );
+
+  {
+    my $reaper = Package::Reaper->new($pkg);
+    isa_ok($reaper, 'Package::Reaper', "the reaper");
+
+    ok(
+      Package::Generator->package_exists($pkg),
+      "package to reap still exists",
+    );
+
+    $reaper->disarm;
+    $reaper->arm;
   }
 
   ok(

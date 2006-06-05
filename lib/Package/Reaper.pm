@@ -150,4 +150,5 @@ under the same terms as Perl itself.
 
 =cut
 
-1;
+"You might be a king or a little street sweeper, but sooner or later you dance
+with Package:Reaper.";

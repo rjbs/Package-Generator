@@ -12,13 +12,13 @@ Package::Generator - generate new packages quickly and easily
 
 =head1 VERSION
 
-version 0.100
+version 0.101
 
  $Id$
 
 =cut
 
-our $VERSION = '0.100';
+our $VERSION = '0.101';
 
 =head1 SYNOPSIS
 
@@ -98,7 +98,12 @@ sub new_package {
     # This ensures that even without symbols, the package is created so that it
     # will not be detected as pristene by package_exists.  Without this line of
     # code, non-unique tests will fail. -- rjbs, 2006-04-14
-    { no strict qw(refs); no warnings qw(void); %{$package . '::'}; }
+    {
+      ## no critic (ProhibitNoStrict)
+      no strict qw(refs);
+      no warnings qw(void);
+      %{$package . '::'};
+    }
   }
 
   return $package;
@@ -117,6 +122,7 @@ sub assign_symbols {
   
   Carp::croak "list of key/value pairs must be even!" if @$key_value_pairs % 2;
 
+  ## no critic (ProhibitNoStrict)
   no strict 'refs';
   while (my ($name, $value) = splice @$key_value_pairs, 0, 2) {
     my $full_name = "$package\:\:$name";

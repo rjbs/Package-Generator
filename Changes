@@ -1,5 +1,9 @@
 Revision history for Package-Generator
 
+0.101   2006-11-06
+        reduce toggling of strictures
+        kwalitee fixes
+
 0.100   2006-06-05
         added Package::Reaper
 

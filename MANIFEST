@@ -21,3 +21,4 @@ t/pod-coverage.t
 t/pod.t
 t/reaper.t
 t/perl-critic.t
+LICENSE

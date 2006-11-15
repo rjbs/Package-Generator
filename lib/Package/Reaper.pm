@@ -13,7 +13,7 @@ Package::Reaper - pseudo-garbage-collection for packages
 
 version 0.101
 
- $Id: /my/cs/projects/pkg-gen/trunk/lib/Package/Generator.pm 4470 2006-04-15T16:52:21.725214Z rjbs  $
+ $Id$
 
 =cut
 

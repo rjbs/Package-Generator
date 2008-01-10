@@ -4,6 +4,7 @@ use warnings;
 use strict;
 
 use Carp ();
+use Symbol ();
 
 =head1 NAME
 
@@ -11,13 +12,11 @@ Package::Reaper - pseudo-garbage-collection for packages
 
 =head1 VERSION
 
-version 0.101
-
- $Id$
+version 0.102
 
 =cut
 
-our $VERSION = '0.101';
+our $VERSION = '0.102';
 
 =head1 SYNOPSIS
 
@@ -116,19 +115,7 @@ sub DESTROY {
 
   my $package = $self->package;
 
-  my $stash_name = $package . '::';
-
-  my ($parent, $rest) = $stash_name =~ /^([:\w]*::)?(\w+::)$/;
-
-  $parent = '::' unless defined $parent;
-
-  # First, remove symbols.  Needed?  I'm not sure! -- rjbs, 2006-06-05
-  {
-    ## no critic (ProhibitNoStrict)
-    no strict 'refs';
-    %$stash_name = ();
-    delete $parent->{$rest};
-  }
+  Symbol::delete_package($package);
 }
 
 =head1 AUTHOR

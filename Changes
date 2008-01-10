@@ -1,5 +1,8 @@
 Revision history for Package-Generator
 
+0.102   2008-01-10
+        delete package using Symbol::delete_package, not a bespoke guess
+
 0.101   2006-11-06
         reduce toggling of strictures
         kwalitee fixes

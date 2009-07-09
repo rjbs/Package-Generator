@@ -1,5 +1,5 @@
 package Package::Generator;
-
+use 5.008;
 use warnings;
 use strict;
 
@@ -12,11 +12,11 @@ Package::Generator - generate new packages quickly and easily
 
 =head1 VERSION
 
-version 0.102
+version 0.103
 
 =cut
 
-our $VERSION = '0.102';
+our $VERSION = '0.103';
 
 =head1 SYNOPSIS
 

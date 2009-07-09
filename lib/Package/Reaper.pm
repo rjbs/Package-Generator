@@ -1,5 +1,5 @@
 package Package::Reaper;
-
+use 5.008;
 use warnings;
 use strict;
 
@@ -12,11 +12,11 @@ Package::Reaper - pseudo-garbage-collection for packages
 
 =head1 VERSION
 
-version 0.102
+version 0.103
 
 =cut
 
-our $VERSION = '0.102';
+our $VERSION = '0.103';
 
 =head1 SYNOPSIS
 

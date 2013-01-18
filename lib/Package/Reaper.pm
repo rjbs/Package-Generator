@@ -80,7 +80,7 @@ sub is_armed {
   $reaper->disarm;
 
 This method disarms the reaper, so that it will not reap the package when it is
-destoryed.
+destroyed.
 
 =cut
 

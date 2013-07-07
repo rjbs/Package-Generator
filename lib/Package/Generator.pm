@@ -1,22 +1,11 @@
+use strict;
+use warnings;
 package Package::Generator;
 use 5.008;
-use warnings;
-use strict;
+# ABSTRACT: generate new packages quickly and easily
 
 use Carp ();
 use Scalar::Util ();
-
-=head1 NAME
-
-Package::Generator - generate new packages quickly and easily
-
-=head1 VERSION
-
-version 0.103
-
-=cut
-
-our $VERSION = '0.103';
 
 =head1 SYNOPSIS
 
@@ -77,7 +66,7 @@ sub new_package {
   my $package;
   for (my $i = 1; 1; $i++) {
     $package = $arg->{make_unique}->($arg->{base}, $arg->{unique_part});
-    last unless $self->package_exists($package); 
+    last unless $self->package_exists($package);
     Carp::croak "couldn't generate a pristene package under $arg->{base}"
       if $i >= $arg->{max_tries};
   }
@@ -117,14 +106,14 @@ This routine is used by C<L</new_package>> to set up the data in a package.
 
 sub assign_symbols {
   my ($self, $package, $key_value_pairs) = @_;
-  
+
   Carp::croak "list of key/value pairs must be even!" if @$key_value_pairs % 2;
 
   ## no critic (ProhibitNoStrict)
   no strict 'refs';
   while (my ($name, $value) = splice @$key_value_pairs, 0, 2) {
     my $full_name = "$package\:\:$name";
-    
+
     if (!ref($value) or Scalar::Util::blessed($value)) {
       ${$full_name} = $value;
     } else {
@@ -156,7 +145,7 @@ sub package_exists {
 # that the above would suffice. -- rjbs, 2006-04-14
 #
 #  my @parts = split /::/, $package;
-#  
+#
 #  my $current_pkg = 'main';
 #  for (@parts) {
 #    my $current_stash = do { no strict 'refs'; \%{$current_pkg . "::"} };
@@ -164,25 +153,5 @@ sub package_exists {
 #    $current_pkg .= "::$_"
 #  }
 #  return 1;
-
-=head1 AUTHOR
-
-Ricardo SIGNES, C<< <rjbs@cpan.org> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to
-C<bug-package-generator@rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org>.  I will be notified, and then you'll automatically be
-notified of progress on your bug as I make changes.
-
-=head1 COPYRIGHT
-
-Copyright 2006 Ricardo Signes, all rights reserved.
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
-
-=cut
 
 1;

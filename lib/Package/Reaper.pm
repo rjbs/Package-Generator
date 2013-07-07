@@ -1,22 +1,11 @@
+use strict;
+use warnings;
 package Package::Reaper;
 use 5.008;
-use warnings;
-use strict;
+# ABSTRACT: pseudo-garbage-collection for packages
 
 use Carp ();
 use Symbol ();
-
-=head1 NAME
-
-Package::Reaper - pseudo-garbage-collection for packages
-
-=head1 VERSION
-
-version 0.103
-
-=cut
-
-our $VERSION = '0.103';
 
 =head1 SYNOPSIS
 
@@ -117,26 +106,6 @@ sub DESTROY {
 
   Symbol::delete_package($package);
 }
-
-=head1 AUTHOR
-
-Ricardo SIGNES, C<< <rjbs@cpan.org> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to
-C<bug-package-generator@rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org>.  I will be notified, and then you'll automatically be
-notified of progress on your bug as I make changes.
-
-=head1 COPYRIGHT
-
-Copyright 2006 Ricardo Signes, all rights reserved.
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
-
-=cut
 
 "You might be a king or a little street sweeper, but sooner or later you dance
 with Package:Reaper.";

@@ -1,6 +1,9 @@
 Revision history for Package-Generator
 
 {{$NEXT}}
+          update github links
+
+          typo fix (thanks, George Hartzell!)
 
 1.105     2013-07-07 08:00:55 America/New_York
           oops, re-repackage, dropping pod tests

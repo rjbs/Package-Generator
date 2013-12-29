@@ -1,6 +1,8 @@
 Revision history for Package-Generator
 
 {{$NEXT}}
+
+1.106     2013-12-28 22:08:25 America/New_York
           update github links
 
           typo fix (thanks, George Hartzell!)
